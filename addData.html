@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-size: 14px; /* Reduced font size */
+        }
+        .container {
+            background-color: white;
+            padding: 15px; /* Reduced padding */
+            border-radius: 8px; /* Smaller border radius */
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); /* Reduced shadow size */
+            width: 90%; /* Adjusted width for better fit on mobile */
+            max-width: 400px;
+        }
+        h2 {
+            text-align: center;
+            font-size: 18px; /* Reduced font size */
+            margin-bottom: 20px; /* Reduced margin */
+        }
+        label {
+            display: block;
+            margin-top: 8px; /* Reduced margin */
+            font-size: 14px; /* Reduced font size */
+        }
+        input[type="text"],
+        input[type="date"],
+        input[type="number"]{
+            max-width: 260; /* Full width for inputs and button */
+            padding: 8px; /* Reduced padding */
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px; /* Smaller border radius */
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%; /* Full width for inputs and button */
+            padding: 8px; /* Reduced padding */
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px; /* Smaller border radius */
+            box-sizing: border-box;
+        }
+        .unit-toggle {
+            width: 20%; /* Adjusted width */
+            padding: 8px; /* Reduced padding */
+            border: 1px solid #ccc;
+            border-radius: 4px; /* Smaller border radius */
+            text-align: center;
+            background-color: #e0e0e0;
+            cursor: pointer;
+            margin-left: 2%;
+            font-size: 12px; /* Reduced font size */
+        }
+        button {
+            background-color: #28a5a7;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px; /* Reduced margin */
+            font-size: 14px; /* Reduced font size */
+        }
+        button:hover {
+            background-color: #218388dc;
+        }
+        .measurements-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px; /* Reduced margin */
+        }
+        .measurements-container label{
+            width: 110px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Add Measurements</h2>
+
+    <label for="siNumber">SI Number:</label>
+    <input type="text" id="siNumber" readonly>
+
+    <label for="dueDate">Due Date:</label>
+    <input type="date" id="dueDate">
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" required>
+
+    <label for="phone">Phone Number:</label>
+    <input type="text" id="phone" required>
+
+    <div class="measurements-container">
+        <label for="length">Length:</label>
+        <input type="number" id="length">
+        <div class="unit-toggle" onclick="toggleUnit('length')">Inch</div>
+    </div>
+
+    <div class="measurements-container">
+        <label for="shoulder">Shoulder:</label>
+        <input type="number" id="shoulder">
+        <div class="unit-toggle" onclick="toggleUnit('shoulder')">Inch</div>
+    </div>
+
+    <div class="measurements-container">
+        <label for="chest">Chest:</label>
+        <input type="number" id="chest">
+        <div class="unit-toggle" onclick="toggleUnit('chest')">Inch</div>
+    </div>
+
+    <div class="measurements-container">
+        <label for="sideOpen">Side Open:</label>
+        <input type="number" id="sideOpen">
+        <div class="unit-toggle" onclick="toggleUnit('sideOpen')">Inch</div>
+    </div>
+
+    <div class="measurements-container">
+        <label for="hand">Hand:</label>
+        <input type="number" id="hand">
+        <div class="unit-toggle" onclick="toggleUnit('hand')">Inch</div>
+    </div>
+
+    <div class="measurements-container">
+        <label for="neck">Neck:</label>
+        <input type="number" id="neck">
+        <div class="unit-toggle" onclick="toggleUnit('neck')">Inch</div>
+    </div>
+
+    <div class="measurements-container">
+        <label for="bottom">Bottom:</label>
+        <input type="number" id="bottom">
+        <div class="unit-toggle" onclick="toggleUnit('bottom')">Inch</div>
+    </div>
+
+    <div class="measurements-container">
+        <label for="lining">Lining:</label>
+        <input type="number" id="lining">
+        <div class="unit-toggle" onclick="toggleUnit('lining')">Inch</div>
+    </div>
+
+    <button onclick="saveData()">Save</button>
+</div>
+
+<script>
+    function generateSiNumber() {
+        const siNumber = 'SI-' + Date.now(); 
+        document.getElementById('siNumber').value = siNumber;
+    }
+
+    function saveData() {
+        const siNumber = document.getElementById('siNumber').value;
+        const dueDate = document.getElementById('dueDate').value;
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const length = document.getElementById('length').value + ' ' + (document.getElementById('length').dataset.unit || 'Inch');
+        const shoulder = document.getElementById('shoulder').value + ' ' + (document.getElementById('shoulder').dataset.unit || 'Inch');
+        const chest = document.getElementById('chest').value + ' ' + (document.getElementById('chest').dataset.unit || 'Inch');
+        const sideOpen = document.getElementById('sideOpen').value + ' ' + (document.getElementById('sideOpen').dataset.unit || 'Inch');
+        const hand = document.getElementById('hand').value + ' ' + (document.getElementById('hand').dataset.unit || 'Inch');
+        const neck = document.getElementById('neck').value + ' ' + (document.getElementById('neck').dataset.unit || 'Inch');
+        const bottom = document.getElementById('bottom').value + ' ' + (document.getElementById('bottom').dataset.unit || 'Inch');
+        const lining = document.getElementById('lining').value + ' ' + (document.getElementById('lining').dataset.unit || 'Inch');
+
+        if (!name || !phone) {
+            alert('Please enter both name and phone number!');
+            return;
+        }
+
+        // Create a composite key using both name and phone number
+        const compositeKey = `${phone}|${name}`;
+
+        // Check for existing data with the same composite key
+        const existingData = localStorage.getItem(compositeKey);
+        if (existingData) {
+            if (confirm('Data with this name and phone number already exists. Do you want to replace it?')) {
+                localStorage.setItem(compositeKey, JSON.stringify({
+                    siNumber,
+                    dueDate,
+                    name,
+                    phone,
+                    measurements: { length, shoulder, chest, sideOpen, hand, neck, bottom, lining }
+                }));
+                alert('Data replaced successfully!');
+            }
+        } else {
+            localStorage.setItem(compositeKey, JSON.stringify({
+                siNumber,
+                dueDate,
+                name,
+                phone,
+                measurements: { length, shoulder, chest, sideOpen, hand, neck, bottom, lining }
+            }));
+            alert('Data saved successfully!');
+        }
+
+        generateSiNumber();
+    }
+
+    function toggleUnit(field) {
+        const inputField = document.getElementById(field);
+        const unitToggle = inputField.nextElementSibling;
+        let currentUnit = inputField.dataset.unit || 'Inch';
+        if (currentUnit === 'Inch') {
+            currentUnit = 'Cm';
+            inputField.value = (parseFloat(inputField.value) * 2.54).toFixed(2);
+        } else {
+            currentUnit = 'Inch';
+            inputField.value = (parseFloat(inputField.value) / 2.54).toFixed(2);
+        }
+        inputField.dataset.unit = currentUnit;
+        unitToggle.innerHTML = currentUnit;
+    }
+
+    window.onload = function() {
+        generateSiNumber();
+    };
+</script>
+
+</body>
+</html>
